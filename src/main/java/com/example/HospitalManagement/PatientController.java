@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Patient")
 public class PatientController {
     HashMap<Integer,Patient> hm = new HashMap<>();
-    @PostMapping("/addPatient")
+    @PostMapping("/add")
     public String addPatient(@RequestBody Patient patient){
         int key = patient.getId();
         hm.put(key,patient);
@@ -24,12 +25,12 @@ public class PatientController {
 
         return "patient added via Parameter";
     }
-    @GetMapping("/getPatient")
+    @GetMapping("/get")
     public Patient getPatient(@RequestParam("id")Integer id){
             Patient p = hm.get(id);
             return p;
     }
-    @GetMapping("/patientList")
+    @GetMapping("/List")
     public List<Patient> listOfPatient(){
         List<Patient> p = new ArrayList<>();
 
@@ -38,7 +39,7 @@ public class PatientController {
         }
         return p;
     }
-    @GetMapping("/getPatientByName")
+    @GetMapping("/getByName")
     public Patient getPatientByName(@RequestParam("name")String name){
         for(Patient p : hm.values()){
             if(p.getName().equals(name)){
